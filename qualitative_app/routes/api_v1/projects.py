@@ -1,17 +1,14 @@
 from typing import Union
 
-from pydantic import BaseModel
 from fastapi import APIRouter
+from qualitative_app.models.project import Project
 
 projects_router = APIRouter(prefix="/projects", tags=["Projects"])
 
 
-class Project(BaseModel):
-    name: str
-    description: str
-    dataset: str
-    classifier: str
-    is_archived: bool = False
+@projects_router.get("/")
+def index_projects():
+    return {"message": "Projects Index"}
 
 
 @projects_router.get("/{project_id}")
